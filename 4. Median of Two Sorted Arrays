@@ -1,0 +1,87 @@
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
+{
+    int i,j;
+	double temp_median;
+	double tmp1,tmp2;
+	tmp1 = 0;
+	tmp2 = 0;
+	i = 0;
+	j = 0;
+	if(nums1Size == 0)
+	{
+		if(nums2Size%2==0)
+			return (double)(nums2[(nums2Size-1)/2]+nums2[(nums2Size)/2])/2;
+		else
+			return (double)nums2[(nums2Size-1)/2];
+	}
+	if(nums2Size == 0)
+	{
+		if(nums1Size%2==0)
+			return (double)(nums1[(nums1Size-1)/2]+nums1[(nums1Size)/2])/2;
+		else
+			return (double)nums1[(nums1Size-1)/2];
+	}
+	if( (nums1Size + nums2Size)%2 == 0)
+	{//find two median take the average
+		while(i+j<=((nums1Size + nums2Size)/2))
+		{
+			if(nums1[i]<nums2[j])
+				if(i<nums1Size)
+				{
+					tmp2 = tmp1;
+					tmp1 = (double)nums1[i];					
+					i++;					
+				}
+				else
+				{
+					tmp2 = tmp1;
+					tmp1 = (double)nums2[j];
+					j++;					
+				}
+			else
+				if(j<nums2Size)
+				{
+					tmp2 = tmp1;
+					tmp1 = (double)nums2[j];
+					j++;					
+				}
+				else
+				{
+					tmp2 = tmp1;
+					tmp1 = (double)nums1[i];
+					i++;									
+				}
+		}
+		return (((double)tmp1+(double)tmp2)/2);
+	}
+	else
+	{//find one median
+		while(i+j<=((nums1Size + nums2Size)/2))
+		{
+			if(nums1[i]<nums2[j])
+				if(i<nums1Size)
+				{
+					temp_median = (double)nums1[i];
+					i++;					
+				}
+				else
+				{
+					temp_median = (double)nums2[j];
+					j++;					
+				}
+			else
+				if(j<nums2Size)
+				{
+					temp_median = (double)nums2[j];
+					j++;					
+				}
+				else
+				{
+					temp_median = (double)nums1[i];
+					i++;									
+				}
+		}
+		return temp_median;
+	}
+
+}
