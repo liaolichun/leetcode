@@ -1,0 +1,40 @@
+
+int lengthOfLongestSubstring(char* s)
+{
+	char *start,*end,*s_flag;
+	int i,num,max_len,tmp_len;
+	int all_done = 0;
+	start = s;
+	end = s;
+	max_len = 1;
+	tmp_len = 1;
+	if(*end == '\0')
+		return 0;
+	while(*(++end) != '\0')
+	{
+		num = ( end - start )/sizeof(char);
+		s_flag = start;
+		for(i=0;i<num;i++)
+		{			
+			if(*s_flag == *end)
+			{
+				tmp_len = ( end - s_flag )/sizeof(char);
+				if(tmp_len > max_len)
+				{
+					max_len = tmp_len;
+				}
+				start = s_flag+1;
+				all_done = 0;
+				break;
+			} 
+			else
+			{
+				s_flag++;
+			}
+			all_done  = 1;
+		}
+		if(all_done == 1&& (num+1>max_len))
+			max_len = num+1;
+	}
+	return max_len;
+}
