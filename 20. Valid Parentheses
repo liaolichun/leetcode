@@ -1,0 +1,52 @@
+bool isValid(char* s) 
+{
+	char *stack;
+
+	int n = 0;
+	stack = (char *)malloc (10000*sizeof (char));
+    if(strlen(s)<1)
+        return true;
+    if(strlen(s)==1)
+        return false;
+	while (*s != '\0')
+	{
+		switch (*s)
+		{
+			case '(':
+			case '[':
+			case '{':
+				stack[n++] = *s;
+				break;
+			case ')':
+                if(n>0)
+                {
+                    if(stack[--n]!='(')
+                        return false;
+                }
+                else
+                    return false;
+				break;
+			case ']':
+				if(n>0)
+                {
+                    if(stack[--n]!='[')
+                        return false;
+                }
+                else
+                    return false;
+				break;
+			case '}':
+				if(n>0)
+                {
+                    if(stack[--n]!='{')
+                        return false;
+                }
+                else
+                    return false;
+				break;
+			default:break;
+		}
+		s++;
+	}
+	return n==0;
+}
