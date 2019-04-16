@@ -1,0 +1,23 @@
+void setZeroes(int** matrix, int matrixRowSize, int *matrixColSizes) 
+{
+    int i,j;
+    
+    for (i = 0;i<matrixRowSize;i++)
+        for(j = 0;j<*matrixColSizes;j++)
+        {
+            if(matrix[i][j]==0)
+            {
+                matrix[i][0] = 0;
+                break;
+            }
+        }
+    for (j = 1;j<*matrixColSizes;j++)
+        for(i = 0;i<matrixRowSize;i++)
+        {
+            if(matrix[i][j]==0)
+            {
+                matrix[i][0] = 0;
+                break;
+            }
+        }
+}
