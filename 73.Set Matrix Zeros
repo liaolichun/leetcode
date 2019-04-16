@@ -1,23 +1,26 @@
 void setZeroes(int** matrix, int matrixRowSize, int *matrixColSizes) 
 {
     int i,j;
-    
+    int *r,*c;
+    r = (int*)malloc(sizeof(int)*matrixRowSize);
+    c = (int*)malloc(sizeof(int)*(*matrixColSizes));
+    memset(r,0,sizeof(int)*matrixRowSize);
+    memset(c,0,sizeof(int)*(*matrixColSizes));
     for (i = 0;i<matrixRowSize;i++)
         for(j = 0;j<*matrixColSizes;j++)
         {
             if(matrix[i][j]==0)
             {
-                matrix[i][0] = 0;
-                break;
+                r[i] = 1;
+                c[j] = 1;
             }
         }
-    for (j = 1;j<*matrixColSizes;j++)
-        for(i = 0;i<matrixRowSize;i++)
+    for (i = 0;i<matrixRowSize;i++)
+        for(j = 0;j<*matrixColSizes;j++)
         {
-            if(matrix[i][j]==0)
+            if(r[i] == 1||c[j] == 1)
             {
-                matrix[i][0] = 0;
-                break;
+               matrix[i][j] = 0;
             }
         }
 }
